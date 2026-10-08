@@ -1,0 +1,1 @@
+/* plein écran du bloc-notes : géré par la pile de navigation principale */
