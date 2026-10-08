@@ -51,7 +51,7 @@
   waitFn('goBible').then(function (orig) {
     if (!orig || orig.__rapide) return;
     var f = function (b, c, v) {
-      var r = rapide(function () { return orig.apply(this, arguments); }.bind(this));
+      var r = rapide(function () { return orig(b, c, v); });
       var out = r;
       try {
         var el = (v != null) ? document.getElementById('v_' + v) : null;
@@ -84,11 +84,14 @@
     return null;
   }
 
-  function waitData() {
+  function waitData(bible) {
     return new Promise(function (res) {
       var n = 0;
       (function step() {
-        try { if (typeof D !== 'undefined' && D && D.meta && D.meta.length) return res(true); } catch (e) { }
+        try {
+          if (typeof D !== 'undefined' && D && D.meta && D.meta.length &&
+              (!bible || (D.books && D.books.length > 60))) return res(true);
+        } catch (e) { }
         if (++n > 400) return res(false);
         setTimeout(step, 100);
       })();
@@ -96,12 +99,23 @@
   }
 
   var lastKey = '';
-  async function go() {
+  /* l'application restaure sa dernière lecture au démarrage : on vérifie
+     que le lien profond a bien été appliqué, et on le réapplique au besoin */
+  function conforme(q) {
+    try {
+      if (typeof S === 'undefined' || !S) return false;
+      if (q.t === 'v') return S.mode === 'bible' && S.book === q.b && S.chap === q.c;
+      if (typeof D === 'undefined' || !D || !D.meta[S.doc]) return false;
+      return S.mode === 'msg' && D.meta[S.doc][0] === q.code && S.curP === q.p;
+    } catch (e) { return false; }
+  }
+
+  async function go(force) {
     var q = parse(); if (!q) return;
     var key = JSON.stringify(q);
-    if (key === lastKey) return;
+    if (key === lastKey && !force) return;
     lastKey = key;
-    if (!(await waitData())) { try { alert('Données non chargées : réessayez.'); } catch (e) { } return; }
+    if (!(await waitData(q.t === 'v'))) { try { alert('Données non chargées : réessayez.'); } catch (e) { } return; }
 
     if (q.t === 'v') {
       var fn = await waitFn('goBible');
@@ -133,7 +147,9 @@
     }
   }
 
-  addEventListener('hashchange', go);
-  setTimeout(go, 1200);
-  window.__wmbOpen = go;
+  addEventListener('hashchange', function () { lastKey = ''; go(true); });
+  [1200, 2600, 4500, 7000, 10000, 14000, 20000].forEach(function (ms) {
+    setTimeout(function () { if (!conforme(parse())) go(true); }, ms);
+  });
+  window.__wmbOpen = function () { lastKey = ''; return go(true); };
 })();
