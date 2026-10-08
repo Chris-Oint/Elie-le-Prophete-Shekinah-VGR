@@ -13,6 +13,8 @@ ZONE_PAGE = re.compile(r"\s*Zone\s*\d+\s*/\s*\d+\s*[—-]\s*page\s*\d+\s*", re.I
 # Decorative title/code tails found after the actual last paragraph.
 TAIL_CODE = re.compile(r"\s+(?:FRN|SHP)\s*\d{2}[-–]\d{3,4}[A-Z]?(?:\s*\([^)]*\))?\s*$", re.I)
 TAIL_BROCHURE = re.compile(r"\s+Brochures\s+William\s+Branham.*$", re.I)
+EDITORIAL_INLINE = re.compile(r"\s+(?:\([^)]{3,100}\)\s+)?(?:Ce (?:Message|texte) est|Tous droits réservés|Veuillez adresser|Avis de droit d’auteur|FRENCH\s+©|Pour plus de renseignements|La Voix de Dieu\s+C\.P\.)\b.*$", re.I)
+EDITORIAL_ONLY = re.compile(r"^(?:Ce (?:Message|texte) est|Tous droits réservés|Veuillez adresser|Avis de droit d’auteur|FRENCH\s+©|Pour plus de renseignements|La Voix de Dieu\s+C\.P\.|B\.P\.\s*\d|supplémentaires peuvent être obtenus)\b", re.I)
 
 
 def norm(s: str) -> str:
@@ -34,6 +36,7 @@ def clean_text(text: str, title: str) -> tuple[str, int]:
     # Remove editorial code and brochure footer text only at the end of a paragraph.
     text = TAIL_BROCHURE.sub("", text)
     text = TAIL_CODE.sub("", text)
+    text = EDITORIAL_INLINE.sub("", text)
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\s+([,.;:!?])", r"\1", text)
     text = text.strip()
@@ -54,6 +57,8 @@ def process(path: Path, write: bool) -> tuple[int, int, int]:
                 changed += 1
                 removed += len(str(text)) - len(cleaned)
             new_paras.append([n, cleaned])
+        while new_paras and EDITORIAL_ONLY.match(new_paras[-1][1].strip()):
+            new_paras.pop()
         doc[4] = new_paras
     if write:
         tmp = path.with_suffix(path.suffix + ".tmp")
