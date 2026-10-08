@@ -1,0 +1,14 @@
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Content-Type = "application/javascript"
+[[headers]]
+for = "/*.gz"
+[headers.values]
+  Content-Type = "application/gzip"
+  Cache-Control = "public, max-age=31536000, immutable"
