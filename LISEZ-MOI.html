@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WMB Bible d'étude — Mode d'emploi hors ligne</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;background:#f6f3ee;color:#1a1c1e;line-height:1.6}
+h1{font-family:Georgia,serif;color:#8b2233;border-bottom:2px solid #8b2233;padding-bottom:10px}
+h2{font-family:Georgia,serif;color:#4c2e23;margin-top:28px}
+.card{background:#fff;border:1px solid #ead6c2;border-radius:14px;padding:18px 22px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+code{background:#fff1e0;padding:2px 6px;border-radius:4px;font-size:.95em}
+button.big{display:inline-block;background:#8b2233;color:#fff;border:0;border-radius:999px;padding:14px 28px;font-size:16px;font-weight:700;cursor:pointer;margin:10px 0;text-decoration:none}
+ol li{margin:8px 0}
+.warn{background:#fff8e6;border-left:4px solid #ff8a3d;padding:12px 16px;border-radius:8px;margin:14px 0}
+.ok{background:#f1f8f3;border-left:4px solid #0f7b3f;padding:12px 16px;border-radius:8px;margin:14px 0}
+</style>
+</head>
+<body>
+<h1>📖 WMB Bible d'étude — Élie le Prophète</h1>
+<p><b>Version autonome et hors ligne</b> — Bible (66 livres) + 1 213 brochures William Marrion Branham (5 zones, Shekinah + VGR) avec correspondances bibliques, recherche, marquages et notes personnelles.</p>
+
+<div class="ok">
+<b>✅ L'application est prête.</b> Le fichier ZIP (<code>WMB-Bible-Etude-Offline.zip</code>, env. 53 Mo) contient tout le nécessaire : textes bibliques, brochures, images, scripts et Service Worker pour une utilisation 100 % hors connexion.
+</div>
+
+<h2>🚀 Comment l'utiliser hors ligne</h2>
+
+<div class="card">
+<h3>Méthode recommandée (meilleure expérience, PWA)</h3>
+<ol>
+<li><b>Décompressez</b> le fichier ZIP dans un dossier de votre ordinateur ou téléphone.</li>
+<li><b>Servez le dossier</b> via un serveur web local (obligatoire pour que le Service Worker fonctionne) :
+  <ul>
+    <li><b>Windows</b> : double-cliquez sur <code>demarrer-windows.bat</code> (si fourni) ou ouvrez un terminal dans le dossier et tapez <code>python -m http.server 8080</code></li>
+    <li><b>Mac / Linux</b> : ouvrez un terminal dans le dossier et tapez <code>python3 -m http.server 8080</code></li>
+    <li><b>Android</b> : utilisez une app comme <i>Simple HTTP Server</i> ou <i>Termux</i></li>
+  </ul>
+</li>
+<li><b>Ouvrez</b> votre navigateur à l'adresse <code>http://localhost:8080</code> (ou l'adresse affichée).</li>
+<li><b>Attendez</b> que la page d'accueil charge. Dans le panneau, cliquez sur <b>« Télécharger tous les textes »</b> (installation hors ligne). Quand elle affiche <i>« Tous les textes sont disponibles hors ligne »</i>, vous pouvez couper Internet.</li>
+<li><b>Ajoutez à l'écran d'accueil</b> (option « Installer l'application » dans Chrome/Edge/Safari) pour la lancer comme une vraie app.</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Méthode simple (sans serveur)</h3>
+<ol>
+<li>Décompressez le ZIP.</li>
+<li>Double-cliquez directement sur <code>index.html</code>. L'application se lance dans le navigateur.</li>
+<li>⚠️ Dans ce mode (protocole <code>file://</code>), le Service Worker n'est pas disponible ; vos notes/marquages sont conservés dans le navigateur mais ne fonctionnent pas entre tous les navigateurs. La lecture et la recherche restent 100 % fonctionnelles.</li>
+</ol>
+</div>
+
+<div class="warn">
+<b>⚠️ Important :</b> Les données (notes, marquages, préférences) sont stockées dans le <i>localStorage</i> du navigateur. Elles sont liées au dossier/serveur depuis lequel vous lancez l'app. Si vous déplacez le dossier ou changez de port, exportez vos notes via <b>4 · Paramètres → Exporter toute mon étude</b> avant, puis réimportez-les.
+</div>
+
+<h2>📂 Contenu</h2>
+<ul>
+<li><code>index.html</code> — Page principale</li>
+<li><code>js/part-*.js</code> — 24 modules JavaScript (interface + logique + données bibliques intégrées)</li>
+<li><code>data/brochures_z1.json.gz</code> à <code>z5</code> — 5 zones de brochures Branham compressées (env. 50 Mo au total)</li>
+<li><code>assets/</code> — Icônes et photos (Jésus, W. Branham)</li>
+<li><code>sw.js</code> — Service Worker pour la mise en cache hors ligne</li>
+<li><code>manifest.webmanifest</code> — Manifeste PWA (installation comme application)</li>
+</ul>
+
+<h2>✨ Fonctionnalités</h2>
+<ul>
+<li>📖 Bible complète (66 livres, Ancien + Nouveau Testament, Louis Segond)</li>
+<li>📚 1 213 brochures/messages W. M. Branham (versions Shekinah et VGR)</li>
+<li>🔗 Correspondances automatique Bible ↔ Brochures (4 couleurs : Exact / Partiel / Contextuel / Erreur de réf.)</li>
+<li>🔍 Recherche globale unifiée (Bible + Brochures) avec filtres (période, source, livre biblique)</li>
+<li>🖍 Marquage coloré et surlignage personnel des passages</li>
+<li>📝 Bloc-notes complet avec mise en forme (carnet 3 colonnes)</li>
+<li>🌓 Thèmes Clair / Sépia / Nuit + plusieurs présentations</li>
+<li>📱 Interface responsive mobile (bulles flottantes, tiroirs, feuilles)</li>
+<li>💾 Sauvegarde locale + export/import JSON de vos études</li>
+</ul>
+
+<p style="text-align:center;margin-top:30px;color:#8f7164;font-size:13px">« Voici, je vous enverrai Élie, le prophète, avant que le jour de l'Éternel arrive » — Malachie 4:5-6</p>
+</body>
+</html>
