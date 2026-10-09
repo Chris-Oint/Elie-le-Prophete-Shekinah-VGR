@@ -3113,6 +3113,6 @@ tidy();schedule();
   D.books.forEach((b,bi)=>{VSTART[bi]=[];b[1].forEach((c,ci)=>{VSTART[bi][ci]=k;c.forEach((_,vi)=>{VB[k]=bi;VC[k]=ci+1;VV[k]=vi+1;k++})})});
   D.links.forEach((l,i)=>{if(!byVi.has(l[2]))byVi.set(l[2],[]);byVi.get(l[2]).push(i);const pk=l[0]*100000+l[1];if(!byPara.has(pk))byPara.set(pk,[]);byPara.get(pk).push(i)});
   $('tabMSG').textContent=`MSG • ${D.codes.toLocaleString('fr')} brochures`;
-  hideLoad();S.book=D.books.findIndex(b=>b[0]==='Apocalypse');S.chap=5;renderBible();window.M4BibleReady=true;
+  hideLoad();S.book=D.books.findIndex(b=>b[0]==='Matthieu');S.chap=1;renderBible();window.M4BibleReady=true;
   if(MODE!=='web')toast('WMB Bible d’étude · Bible complète et cinq zones de brochures intégrées.',5000);
 })().catch(e=>{window.M4BibleReady=true;$('loading').textContent='Erreur : '+e.message});
