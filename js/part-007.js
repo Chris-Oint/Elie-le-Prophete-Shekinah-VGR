@@ -72,18 +72,18 @@
       try{localStorage.setItem('wmb-presentation',v);}catch(e){}
       document.querySelectorAll('.pres-opt').forEach(b=>b.classList.toggle('on',b.dataset.pres===v));
     }
-    (function(){let v='3';try{v=localStorage.getItem('wmb-presentation')||'3';}catch(e){}if(!['1','3','4'].includes(v))v='3';setPresLike(v);})();
+    (function(){let v='4';try{v=localStorage.getItem('wmb-presentation')||'4';}catch(e){}if(!['1','3','4'].includes(v))v='4';setPresLike(v);})();
     function openPresTray(){
-      let cur='3';
-      try{cur=body.dataset.presentation||localStorage.getItem('wmb-presentation')||'3';}catch(e){}
-      if(!['1','3','4'].includes(cur))cur='3';
+      let cur='4';
+      try{cur=body.dataset.presentation||localStorage.getItem('wmb-presentation')||'4';}catch(e){}
+      if(!['1','3','4'].includes(cur))cur='4';
       bubbleTray('Mode de présentation',[['1','Classique','▤'],['3','Élégant','❖'],['4','Nuit','☾']],cur,setPresLike);
     }
 
     /* --- THÈME : vrais thèmes de l'app (V9CThemesTest) --- */
     function openThemeTray(){
-      let cur='orange';
-      try{const x=JSON.parse(localStorage.getItem('wmb-v9-global-theme-v1')||'{}');if(x&&x.id==='nuit')cur='nuit';}catch(e){}
+      let cur='nuit';
+      try{const x=JSON.parse(localStorage.getItem('wmb-v9-global-theme-v1')||'{}');if(x&&x.id==='orange')cur='orange';}catch(e){}
       bubbleTray('Thème',[['orange','Clair','☀',{background:'#f4f1ea',color:'#2a2622'}],['nuit','Sombre','☾',{background:'#222224',color:'#f1ead8'}]],cur,function(id){
         if(window.V9CThemesTest&&V9CThemesTest.applyTheme)V9CThemesTest.applyTheme(id);
       });

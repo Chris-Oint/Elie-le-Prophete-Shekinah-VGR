@@ -8,7 +8,7 @@
   };
   function safeGet(k,fallback){try{const v=localStorage.getItem(k);return v===null?fallback:v}catch(e){return fallback}}
   function safeSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
-  function getTheme(){try{const x=JSON.parse(localStorage.getItem(KEY)||'{}');return x.id==='nuit'?'nuit':'orange'}catch(e){return 'orange'}}
+  function getTheme(){try{const x=JSON.parse(localStorage.getItem(KEY)||'{}');return x.id==='orange'?'orange':'nuit'}catch(e){return 'nuit'}}
   function applyTheme(id,save=true){
     id=id==='nuit'?'nuit':'orange';
     root.dataset.v9Theme=id;body.dataset.v9Theme=id;
@@ -40,7 +40,9 @@
   }
   function getScale(){const n=Number(safeGet('m4-text-k','100'));return Number.isFinite(n)?Math.max(70,Math.min(160,n)):100}
   function setScale(n){n=Math.max(70,Math.min(160,Math.round(n)));root.style.setProperty('--m4-k',String(n/100));safeSet('m4-text-k',String(n));return n}
-  function getPres(){let v=safeGet('wmb-presentation','3');if(!['1','3','4'].includes(v))v='3';return v}
+  function getPres(){let v=safeGet('wmb-presentation','4');if(!['1','3','4'].includes(v))v='4';return v}
+  /* L’ancienne version enregistrait « Élégant » comme valeur par défaut ; bascule une fois ce faux choix vers Nuit. */
+  try{const mk='wmb-presentation-default-v1';if(localStorage.getItem(mk)!=='done'){if(localStorage.getItem('wmb-presentation')==='3')localStorage.setItem('wmb-presentation','4');localStorage.setItem(mk,'done');}}catch(e){}
   function setPres(v){if(!['1','3','4'].includes(String(v)))return;v=String(v);body.dataset.presentation=v;safeSet('wmb-presentation',v);$$('.pres-opt').forEach(b=>b.classList.toggle('on',b.dataset.pres===v));}
   function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
   applyTheme(getTheme(),false);setScale(getScale());setPres(getPres());

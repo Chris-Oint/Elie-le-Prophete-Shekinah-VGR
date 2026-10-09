@@ -1,18 +1,25 @@
 {
   "id": "/Elie-le-Prophete-Shekinah-VGR/",
-  "name": "WMB Bible d’étude — Élie le prophète",
-  "short_name": "Bible Élie",
-  "description": "Bible d’étude et 1213 brochures Branham, disponibles hors connexion.",
+  "name": "WMB Bible d’étude",
+  "short_name": "WMB Bible d’étude",
+  "description": "WMB Bible d’étude et 1213 brochures Branham, disponibles hors connexion.",
   "lang": "fr",
   "dir": "ltr",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui"],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "orientation": "portrait-primary",
-  "background_color": "#f6f3ee",
-  "theme_color": "#8b2233",
-  "categories": ["books", "education", "lifestyle"],
+  "background_color": "#141922",
+  "theme_color": "#141922",
+  "categories": [
+    "books",
+    "education",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "./assets/icon-192.png",

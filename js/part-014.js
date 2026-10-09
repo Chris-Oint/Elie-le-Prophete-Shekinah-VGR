@@ -321,7 +321,7 @@ ready().then(()=>{
  // ---- Modes de présentation (3 modèles), mémorisés
  const PRES=[['1','Classique','Grandes cartes, brochures et passages croisés visibles en bas.'],['3','Élégant','Papier chaud, filet doré, numéros discrets, correspondances repliées.'],['4','Nuit','Fond sombre reposant, numéros dorés, mêmes fonctions.']];
  function setPres(v){document.body.dataset.presentation=v;try{localStorage.setItem('wmb-presentation',v)}catch(e){}document.querySelectorAll('.pres-opt').forEach(b=>b.classList.toggle('on',b.dataset.pres===v));}
- setPres((()=>{try{const v=localStorage.getItem('wmb-presentation')||'1';return ['1','3','4','6','7','8'].includes(v)?v:'1'}catch(e){return '1'}})());
+ setPres((()=>{try{const v=localStorage.getItem('wmb-presentation')||'4';return ['1','3','4','6','7','8'].includes(v)?v:'4'}catch(e){return '4'}})());
  function presCard(){const c=document.createElement('section');c.className='pres-card';c.id='presModeCard';c.innerHTML='<h3>Mode de présentation</h3><div class="pres-grid">'+PRES.map(([v,t,d])=>`<button type="button" class="pres-opt ${document.body.dataset.presentation===v?'on':''}" data-pres="${v}"><div class="pres-prev p${v}"></div><b>${v}. ${t}</b><small>${d}</small></button>`).join('')+'</div>';c.querySelectorAll('.pres-opt').forEach(b=>b.onclick=()=>setPres(b.dataset.pres));return c;}
  // Échelle générale de l'application
  function setScale(v){v=Math.max(70,Math.min(140,+v||100));document.body.style.zoom=(v/100);try{localStorage.setItem('wmb-scale',String(v))}catch(e){}const o=$('scaleVal');if(o)o.textContent=v+' %';const r=$('scaleRange');if(r&&+r.value!==v)r.value=v;}

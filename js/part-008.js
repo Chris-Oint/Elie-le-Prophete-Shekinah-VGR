@@ -15,6 +15,8 @@ function cleanPanel(){const b=$('dBody');if(!b)return;const kids=[...b.children]
 new MutationObserver(cleanPanel).observe($('dBody'),{childList:true});
 /* ---------- B. Mémoire de lecture ---------- */
 const LK='m4-last';let last={};try{last=JSON.parse(localStorage.getItem(LK)||'{}')}catch(e){}
+/* Une seule migration du démarrage historique (Apocalypse 6) vers Matthieu 1 ; toute lecture réellement reprise ensuite reste mémorisée. */
+try{const MK='wmb-matthew1-home-v1';if(localStorage.getItem(MK)!=='done'){if(+last.book===65&&+last.chap===5&&last.mode==='bible'&&last.doc==null){last={mode:'bible',book:39,chap:1,v:null,doc:null,p:1};localStorage.setItem(LK,JSON.stringify(last));}localStorage.setItem(MK,'done');}}catch(e){}
 if(last.doc!=null)window.lastDoc=last.doc;
 let ready=false;
 setInterval(()=>{if(!ready||typeof S==='undefined')return;let vv=last.v;if(S.mode==='bible'){const hb=document.querySelector('header')?.getBoundingClientRect().bottom||0;for(const c of document.querySelectorAll('#bibleView .vcard')){if(c.getBoundingClientRect().bottom>hb+30){vv=+c.id.slice(2);break}}}

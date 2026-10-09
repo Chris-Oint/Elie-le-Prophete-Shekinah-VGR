@@ -11,7 +11,7 @@ const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let D=null, VB, VC, VV, VSTART=[], byVi=new Map(), byPara=new Map();
 const ZD={}, loadingZ={};
-const S={mode:'bible',book:65,chap:5,doc:null};
+const S={mode:'bible',book:39,chap:1,doc:null};
 
 async function gunzipB64(b64){const bin=atob(b64);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
   return await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text()}

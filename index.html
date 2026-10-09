@@ -5,20 +5,20 @@
 <style id="m4-splash-style">
 body.m4-booting{overflow:hidden!important}
 body.m4-booting>*:not(#m4Splash){visibility:hidden!important}
-#m4Splash{position:fixed;inset:0;z-index:2147483000;background:#f7ede1;color:#4c2e23;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(3vh + env(safe-area-inset-top,0px)) 18px calc(3vh + env(safe-area-inset-bottom,0px));font-family:Georgia,'Times New Roman',serif;text-align:center;opacity:1;transition:opacity .7s ease;visibility:visible!important}
+#m4Splash{position:fixed;inset:0;z-index:2147483000;background:#141922;color:#ECE6DA;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(3vh + env(safe-area-inset-top,0px)) 18px calc(3vh + env(safe-area-inset-bottom,0px));font-family:Georgia,'Times New Roman',serif;text-align:center;opacity:1;transition:opacity .7s ease;visibility:visible!important}
 #m4Splash.leave{opacity:0;pointer-events:none}
 .m4s-stack{display:flex;flex-direction:column;align-items:center;gap:12px;width:min(100%,520px)}
-.m4s-ph{width:clamp(100px,26vw,140px);height:clamp(100px,26vw,140px);object-fit:cover;object-position:50% 18%;border-radius:50%;border:4px solid #fff7ef;box-shadow:0 0 0 3px #8b2233,0 13px 32px rgba(58,32,18,.15);background:#fff7ef;flex:none}
+.m4s-ph{width:clamp(100px,26vw,140px);height:clamp(100px,26vw,140px);object-fit:cover;object-position:50% 18%;border-radius:50%;border:4px solid #1D2530;box-shadow:0 0 0 3px #D2A85A,0 13px 32px rgba(0,0,0,.35);background:#1D2530;flex:none}
 .m4s-j{animation:m4in .8s ease both}
 .m4s-b{opacity:0;transform:scale(.08);transition:opacity .5s ease,transform .9s cubic-bezier(.2,.9,.3,1.15)}
 .m4s-b.show{opacity:1;transform:none}
-.m4s-mid{width:100%;padding:16px 16px 14px;border-radius:20px;border:1px solid #ead6c2;background:#fff7ef;box-shadow:0 8px 22px rgba(58,32,18,.1);clip-path:inset(0 50% 0 50% round 20px)}
+.m4s-mid{width:100%;padding:16px 16px 14px;border-radius:20px;border:1px solid #26303D;background:#1D2530;box-shadow:0 8px 22px rgba(0,0,0,.35);clip-path:inset(0 50% 0 50% round 20px)}
 .m4s-1{margin:0 auto;max-width:480px;font-size:clamp(20px,5.4vw,30px);font-weight:700;line-height:1.25;white-space:pre-line}
-.m4s-2{margin:10px 0 0;color:#8b2233;font-size:clamp(13px,3.6vw,20px);font-weight:800;letter-spacing:.08em}
-.m4s-3{margin:0;font-size:clamp(17px,4.6vw,26px);font-weight:700;font-style:italic;color:#8b2233;min-height:1.3em}
+.m4s-2{margin:10px 0 0;color:#D2A85A;font-size:clamp(13px,3.6vw,20px);font-weight:800;letter-spacing:.08em}
+.m4s-3{margin:0;font-size:clamp(17px,4.6vw,26px);font-weight:700;font-style:italic;color:#D2A85A;min-height:1.3em}
 .m4s-h{visibility:hidden}
 .m4s-ball{position:fixed;left:0;top:0;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#666,#0a0a0a 62%);box-shadow:0 3px 9px rgba(0,0,0,.5);z-index:3;pointer-events:none;opacity:0;will-change:transform}
-.m4s-skip{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:12px;border:1px solid #ead6c2;border-radius:999px;background:#fff7ef;color:#4c2e23;padding:7px 12px;font:700 11px system-ui,sans-serif;opacity:.7;z-index:4}
+.m4s-skip{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:12px;border:1px solid #26303D;border-radius:999px;background:#1D2530;color:#ECE6DA;padding:7px 12px;font:700 11px system-ui,sans-serif;opacity:.7;z-index:4}
 @keyframes m4in{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
 /* ===== Correctifs d'affichage (en-tete et bulles), actifs des le chargement ===== */
 #app #btnDemo,#app #showGuide,#app .hrow .wmb-photo,#app .hright .demo{display:none!important}
@@ -200,7 +200,7 @@ body.reading-only header,body.reading-only .tabs,body.reading-only .book-float,b
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <meta name="application-name" content="WMB Bible d’étude">
-<meta name="msapplication-TileImage" content="assets/icon-512.png"><meta name="theme-color" content="#f6f3ee"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="WMB Bible d’étude"><meta name="mobile-web-app-capable" content="yes"><script src="js/part-001.js"></script>
+<meta name="msapplication-TileImage" content="assets/icon-512.png"><meta name="theme-color" content="#141922"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="WMB Bible d’étude"><meta name="mobile-web-app-capable" content="yes"><script src="js/part-001.js"></script>
 <script src="js/part-002.js"></script></head>
 <body class="m4-booting">
 <script src="js/part-003.js"></script>

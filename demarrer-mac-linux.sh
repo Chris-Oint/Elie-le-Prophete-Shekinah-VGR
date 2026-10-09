@@ -7,7 +7,7 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo ""
 echo "============================================"
-echo "  WMB Bible d'étude - Élie le Prophète"
+echo "  WMB Bible d’étude"
 echo "  Serveur local hors ligne sur http://localhost:$PORT"
 echo "============================================"
 echo ""

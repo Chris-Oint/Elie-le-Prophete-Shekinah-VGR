@@ -3,7 +3,7 @@ chcp 65001 >nul
 title WMB Bible d'étude - Serveur local hors ligne
 echo.
 echo ============================================
-echo   WMB Bible d'étude - Élie le Prophète
+echo   WMB Bible d’étude
 echo   Serveur local hors ligne
 echo ============================================
 echo.

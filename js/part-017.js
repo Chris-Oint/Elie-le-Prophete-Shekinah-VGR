@@ -7,7 +7,7 @@
     'nuit':{label:'Charbon',swatch:'#222224',bg:'#18181a',card:'#26262a',paper:'#2b2b2f',ink:'#f1ead8',muted:'#b9ae96',line:'#5b4a2b',accent:'#d4a85a',accent2:'#e3c07a',header:'#121214',bubble:'#2a2a2d',bubbleBorder:'#c9a45c',c0:'#72b38d',c1:'#8eace0',c2:'#e0ad6a',c3:'#d98b98'}
   };
   const KEY='wmb-v9-global-theme-v1';
-  let state={id:'orange',soft:74};
+  let state={id:'nuit',soft:74};
   try{const x=JSON.parse(localStorage.getItem(KEY)||'{}');if(THEMES[x.id])state.id=x.id;if(Number.isFinite(+x.soft))state.soft=Math.max(0,Math.min(100,+x.soft))}catch(e){}
   function hex(h){h=String(h).replace('#','');if(h.length===3)h=h.split('').map(x=>x+x).join('');const n=parseInt(h,16);return [n>>16,(n>>8)&255,n&255]}
   function rgb(c){const a=hex(c);return '#'+a.map(n=>n.toString(16).padStart(2,'0')).join('')}
