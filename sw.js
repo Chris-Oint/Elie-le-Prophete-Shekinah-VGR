@@ -1,7 +1,8 @@
-const CACHE_NAME = 'wmb-app-v7';   // v6 : identité WMB, icônes, thème sombre et démarrage Matthieu 1
+const CACHE_NAME = 'wmb-app-v8';   // v6 : identité WMB, icônes, thème sombre et démarrage Matthieu 1
 const CORE_PATHS = [
   "./",
   "./index.html",
+  "./dictionnaire-branham-integral.html",
   "./manifest.webmanifest",
   "./manus-routes.json",
   "./js/part-001.js",

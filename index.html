@@ -623,6 +623,40 @@ html[data-v9-theme=nuit] #m4HistBar .hb-title{color:#e3c07a}
 #m4HistBar .hb-types .m4tr.on{border-bottom-color:#8b2233!important;color:#8b2233!important}
 html[data-v9-theme=nuit] #m4HistBar .hb-types .m4tr.on{border-bottom-color:#e3c07a!important;color:#e3c07a!important}
 </style>
+
+<style id="wmb-dictionary-integration-style">
+#wmbDictionaryView{position:fixed;inset:0;z-index:1200;display:none;background:var(--v9-theme-bg,#f5f1e8);color:var(--v9-theme-ink,#4c2e23)}
+#wmbDictionaryView.on{display:flex;flex-direction:column}
+#wmbDictionaryView .wmb-dictionary-bar{display:flex;align-items:center;gap:10px;min-height:54px;padding:8px 12px;background:var(--v9-theme-card,#fffaf4);border-bottom:1px solid var(--v9-theme-line,#ead6c2);box-shadow:0 2px 10px #0001}
+#wmbDictionaryView .wmb-dictionary-back{border:1px solid var(--v9-theme-line,#ead6c2);border-radius:999px;background:var(--v9-theme-paper,#fff7ef);color:var(--v9-theme-ink,#4c2e23);padding:8px 13px;font:800 13px system-ui,sans-serif;cursor:pointer}
+#wmbDictionaryView .wmb-dictionary-title{font:700 16px Georgia,'Times New Roman',serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#wmbDictionaryView iframe{display:block;flex:1;width:100%;border:0;background:#f5f1e8}
+body.wmb-dictionary-open{overflow:hidden}
+</style>
+<script id="wmb-dictionary-integration">
+(function(){
+  'use strict';
+  let view, frame;
+  function theme(){return document.documentElement.getAttribute('data-v9-theme')||document.body.getAttribute('data-v9-theme')||'orange'}
+  function syncTheme(){if(frame?.contentWindow)frame.contentWindow.postMessage({type:'wmb-theme',theme:theme()},'*')}
+  function ensure(){
+    if(view)return;
+    view=document.createElement('section');view.id='wmbDictionaryView';view.setAttribute('role','dialog');view.setAttribute('aria-label','Dictionnaire selon Malachie 4');
+    view.innerHTML='<div class="wmb-dictionary-bar"><button type="button" class="wmb-dictionary-back" aria-label="Retour à la Bible">← Bible</button><span class="wmb-dictionary-title">Dictionnaire selon Malachie 4 · Intégral</span></div><iframe title="Dictionnaire selon Malachie 4 — Intégral" loading="eager"></iframe>';
+    document.body.append(view);frame=view.querySelector('iframe');view.querySelector('button').addEventListener('click',close);frame.addEventListener('load',syncTheme);
+  }
+  function open(){ensure();view.classList.add('on');document.body.classList.add('wmb-dictionary-open');if(!frame.src)frame.src='dictionnaire-branham-integral.html?embedded=1';else syncTheme();history.pushState({wmbDictionary:true},'','#dictionnaire');}
+  function close(){if(!view)return;view.classList.remove('on');document.body.classList.remove('wmb-dictionary-open');if(location.hash==='#dictionnaire')history.back();}
+  window.WMBDictionary={open,close};
+  window.addEventListener('message',event=>{if(event.source===frame?.contentWindow&&event.data?.type==='wmb-dictionary-close')close();});
+  window.addEventListener('popstate',()=>{if(location.hash!=='#dictionnaire')close();});
+  window.addEventListener('keydown',event=>{if(event.key==='Escape'&&view?.classList.contains('on'))close();});
+  document.addEventListener('m4-theme-change',syncTheme);
+  const dictionary=document.querySelector('[data-go="dictionary"]');
+  dictionary?.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();open();},true);
+})();
+</script>
+
 </body>
 </html>
 
@@ -727,6 +761,7 @@ header{background:linear-gradient(180deg,#f4ebdd,#ecdfc9)!important;border-botto
  <button type="button" class="v9b" data-go="notes" aria-label="2 · Note"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#353535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 12h6M9 16h6"/></svg></span><small>2 · Note</small></button>
  <button type="button" class="v9b" data-go="history" aria-label="3 · Historique"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#353535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><small>3 · Historique</small></button>
  <button type="button" class="v9b" data-go="settings" aria-label="4 · Paramètres"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#353535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></span><small>4 · Paramètres</small></button>
+ <button type="button" class="v9b" data-go="dictionary" aria-label="5 · Dictionnaire"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#353535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 5.5v15M8 7h8M8 11h8M8 15h5"/></svg></span><small>5 · Dictionnaire</small></button>
 </div>
 <div id="v9Sel" aria-label="Actions sur la sélection">
  <div class="row main"><span class="cnt" id="v9Cnt"></span><button type="button" id="v9Hi" class="v9b" title="surligner"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#353535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1 10-10-3-3L5 16z"/><path d="M13 7l3 3"/><path d="M3 21h8" stroke="#ffd700" stroke-width="3"/></svg></span><small>surligner</small></button><button type="button" id="v9Un" class="v9b" title="souligner"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#353535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v6a5 5 0 0 0 10 0V4"/><path d="M5 20h14" stroke="#3b82f6" stroke-width="3"/></svg></span><small>souligner</small></button><button type="button" id="v9Cp" class="v9b" title="copier"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#353535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg></span><small>copier</small></button><button type="button" id="v9X" class="v9b sm" title="fermer"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#353535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span><small>fermer</small></button></div>

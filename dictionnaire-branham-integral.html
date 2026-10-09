@@ -36,7 +36,17 @@ main{padding:12px 14px 50px;max-width:760px;margin:auto}
 .src{font:600 11px system-ui,sans-serif;color:#fff;background:var(--blue);border-radius:8px;padding:1px 7px;margin-right:6px}
 .def.bd p{border-left:3px solid var(--blue);padding-left:9px}.refs{margin:6px 0}.note{font-style:italic}.pn{font:13px system-ui,sans-serif;color:var(--mute)}
 .def.an p{margin:0 0 4px}.meta .n{white-space:normal;text-align:left}
-</style></head><body>
+</style>
+<style id="wmb-embedded-dictionary-style">
+body.wmb-embedded-dictionary{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+body.wmb-embedded-dictionary header{box-shadow:0 2px 10px #0001;border-bottom:1px solid var(--line)}
+body.wmb-embedded-dictionary h1{font-family:Georgia,"Times New Roman",serif}
+body.wmb-embedded-dictionary .wmb-dictionary-return{display:inline-flex;align-items:center;min-height:36px;margin:0 0 8px;padding:7px 12px;border:1px solid var(--acc);border-radius:999px;background:transparent;color:var(--acc);font:800 12px system-ui,sans-serif;cursor:pointer}
+body.wmb-embedded-dictionary[data-parent-theme="nuit"]{--bg:#141922;--card:#1d2530;--ink:#ece6da;--mute:#9aa3b2;--acc:#d2a85a;--line:#2e3948;--quote:#26303d;--bar:#d2a85a}
+body.wmb-embedded-dictionary[data-parent-theme="nuit"] header{box-shadow:0 2px 12px #0006}
+body.wmb-embedded-dictionary[data-parent-theme="nuit"] input,body.wmb-embedded-dictionary[data-parent-theme="nuit"] .card{background:#1d2530;color:#ece6da}
+</style>
+</head><body>
 <header><h1>Dictionnaire selon Malachie 4<small>Intégral 8 · personnages : anciens noms, références bibliques et brochures</small></h1>
 <input id="q" type="search" placeholder="Rechercher un mot, nombre, couleur, animal, personnage…" autocomplete="off">
 <div class="row"><select id="f"></select><span class="cnt" id="c"></span></div></header>
@@ -87,4 +97,17 @@ function openC(ti){const t=T[ti],c=t.cite;
 function showC(ti,k,n){const P=DATA.P[k]||{};$('cp').innerHTML=`<div class="ps"><div class="meta">${esc(k.split('|')[0])} · §${n}</div><div class="par">${esc(P[n]||'')}</div></div>`;$('cp').scrollIntoView({behavior:'smooth'})}
 $('modal').onclick=e=>{if(e.target.id==='modal')$('modal').style.display='none'};
 $('q').oninput=render;$('f').onchange=render;render();
-</script></body></html>
+</script>
+<script id="wmb-embedded-dictionary-script">
+(function(){
+  const embedded=new URLSearchParams(location.search).get('embedded')==='1';
+  if(!embedded)return;
+  document.body.classList.add('wmb-embedded-dictionary');
+  const back=document.createElement('button');back.type='button';back.className='wmb-dictionary-return';back.textContent='← Retour à la Bible';
+  back.addEventListener('click',()=>window.parent.postMessage({type:'wmb-dictionary-close'},'*'));
+  document.querySelector('header')?.prepend(back);
+  document.title='WMB — Bible d’étude · Dictionnaire selon Malachie 4';
+  window.addEventListener('message',event=>{if(event.data?.type==='wmb-theme')document.body.dataset.parentTheme=event.data.theme||'orange';});
+})();
+</script>
+</body></html>
